@@ -50,7 +50,7 @@
         </el-form-item>
         <el-form-item label="科室">
           <el-cascader
-          :data="types"
+            :data="types"
             :props="defaultParams"
             :options="options"
             v-model="selectedOptions1"
@@ -93,7 +93,7 @@
         <el-form-item label="学历">
           <el-input v-model="form.education" />
         </el-form-item>
-         <el-form-item label="电话">
+        <el-form-item label="电话">
           <el-input v-model="form.telephone" />
         </el-form-item>
         <el-form-item label="面貌">
@@ -164,7 +164,7 @@ export default {
       })
   },
   methods: {
-    shiqu(){
+    shiqu() {
       window.location.reload()
     },
     quxiao() {
@@ -176,16 +176,16 @@ export default {
       console.log(this.Edit)
       //修改医生
       get('/updateDoctors', {
-        docId:this.Edit.docId,
-        docName:this.Edit.docName,
-        docTitle:this.Edit.docTitle,
-        politicstatus:this.Edit.politicstatus,
-        education:this.Edit.education,
-        telephone:this.Edit.telephone,
-        nation:this.Edit.nation,
-        introduction:this.Edit.introduction,
-        departId1:this.selectedOptions1[0],
-        departId2:this.selectedOptions1[1]
+        docId: this.Edit.docId,
+        docName: this.Edit.docName,
+        docTitle: this.Edit.docTitle,
+        politicstatus: this.Edit.politicstatus,
+        education: this.Edit.education,
+        telephone: this.Edit.telephone,
+        nation: this.Edit.nation,
+        introduction: this.Edit.introduction,
+        departId1: this.selectedOptions1[0],
+        departId2: this.selectedOptions1[1]
       })
       ElMessage({
         message: '修改成功',
@@ -219,7 +219,7 @@ export default {
         nation: this.form.nation,
         politicstatus: this.form.region,
         sex: this.form.resource,
-        telephone:this.form.telephone,
+        telephone: this.form.telephone,
         departId1: this.form.selectedOptions[0],
         departId2: this.form.selectedOptions[1]
       })
