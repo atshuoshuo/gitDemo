@@ -9,21 +9,22 @@
       <el-table-column prop="politicstatus" label="政治面貌" width="180" />
       <el-table-column prop="education" label="学历" width="180" />
       <el-table-column prop="nation" label="民族" width="180" />
+      <el-table-column prop="userName" label="用户名" width="180" />
       <el-table-column prop="telephone" label="电话" width="180" />
-      <el-table-column fixed="right" label="操作" width="300">
+      <el-table-column fixed="right" label="操作" width="310">
         <template #default="row">
           <el-button type="success" @click="handleDiaClick(row)">
             更多编辑
           </el-button>
+          <el-button type="warning" @click="allocation(row)">
+            分配账号
+          </el-button>
           <!-- 删除确认框 -->
           <el-popconfirm title="确定要删除吗?" @confirm="deleks(row)">
             <template #reference>
-              <el-button type="warning">删除</el-button>
+              <el-button type="danger">删除</el-button>
             </template>
           </el-popconfirm>
-          <el-button type="success" @click="handleDiaClick(row)">
-            分配账号
-          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -127,6 +128,23 @@
         </span>
       </template>
     </el-dialog>
+
+    <!-- 分配账号 -->
+    <el-dialog v-model="dialogVisible2" title="分配账号" width="30%">
+      <el-form label-width="120px">
+        <el-form-item label="用户名" :data="types">
+          <el-input v-model="Edit.userName" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible2 = false">取消</el-button>
+          <el-button type="primary" @click="fenpei()" v-model="dialogVisible2"
+            >确认</el-button
+          >
+        </span>
+      </template>
+    </el-dialog>
   </el-card>
 </template>
 
@@ -140,6 +158,7 @@ export default {
       types: [],
       dialogVisible: false,
       dialogVisible1: false,
+      dialogVisible2: false,
       Edit: [],
       form: [],
       //二级联动
@@ -164,6 +183,15 @@ export default {
       })
   },
   methods: {
+    //分配账号
+    allocation(row) {
+      this.Edit = row.row
+      this.selectedOptions1[0] = this.Edit.departId1
+      this.selectedOptions1[1] = this.Edit.departId2
+      console.log(this.Edit)
+      console.log(this.selectedOptions1)
+      this.dialogVisible2 = !this.dialogVisible2
+    },
     shiqu() {
       window.location.reload()
     },
@@ -244,6 +272,37 @@ export default {
         type: 'success'
       })
       window.location.reload()
+    },
+    //分配账号
+    fenpei() {
+      this.dialogVisible2 = !this.dialogVisible2
+      get('/registerUser', {
+        userName: this.Edit.userName,
+        telephone: this.Edit.telephone,
+        realName: this.Edit.docName,
+        password: 123456,
+        userRole: 'doctor'
+      }).then((row) => {
+        console.log(row)
+        if (row.data.code == 0) {
+          get('/updateDoctors', {
+            docId: this.Edit.docId,
+            userName: this.Edit.userName,
+            departId1: this.selectedOptions1[0],
+            departId2: this.selectedOptions1[1]
+          })
+          ElMessage({
+            message: '分配成功',
+            type: 'success'
+          })
+        } else {
+          ElMessage({
+            message: '分配失败，已经账号',
+            type: 'error'
+          })
+          window.location.reload()
+        }
+      })
     }
   }
 }
