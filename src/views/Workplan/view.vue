@@ -152,10 +152,12 @@ export default {
     lastweek() {
       this.dayList = []
       this.getBeforNday(this.base, 7)
+      this.getDoctors()
     },
     nextweek() {
       this.dayList = []
       this.getBeforNday(this.base, -7)
+      this.getDoctors()
     },
     getBeforNday(date, n) {
       var yesterday_milliseconds = date.getTime() - n * 1000 * 60 * 60 * 24
@@ -169,11 +171,13 @@ export default {
       }
       this.lastsunday = strYear + '年' + strMonth + '月' + strDay + '日'
       this.base = yesterday
+      this.weekList=[];
       for(var i=-1;i>-8;i--)
         this.getotherday(yesterday, i)
 
     },
     getotherday(date, n) {
+      
       var yesterday_milliseconds = date.getTime() - n * 1000 * 60 * 60 * 24
       var yesterday = new Date()
       yesterday.setTime(yesterday_milliseconds)
@@ -225,6 +229,7 @@ export default {
         this.lastsunday = strYear + '年' + strMonth + '月' + strDay + '日'
         this.dayList.push(this.sunday1)
       }
+
        this.weekList.push(strYear + '-' + strMonth + '-' + strDay)
     }
   }
