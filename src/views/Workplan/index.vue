@@ -24,7 +24,6 @@
       </el-divider>
       <table
         border="0"
-        b
         cellspacing="1px"
         bordercolor="#254389"
         cellpadding="0"
@@ -32,13 +31,13 @@
       >
         <thead>
           <tr height="50">
-            <td width="200">{{ monday1 }}</td>
-            <td width="200">{{ tuesday1 }}</td>
-            <td width="200">{{ wednesday1 }}</td>
-            <td width="200">{{ thursday1 }}</td>
-            <td width="200">{{ friday1 }}</td>
-            <td width="200">{{ saturday1 }}</td>
-            <td width="200">{{ sunday1 }}</td>
+            <td width="180">{{ monday1 }}</td>
+            <td width="180">{{ tuesday1 }}</td>
+            <td width="180">{{ wednesday1 }}</td>
+            <td width="180">{{ thursday1 }}</td>
+            <td width="180">{{ friday1 }}</td>
+            <td width="180">{{ saturday1 }}</td>
+            <td width="180">{{ sunday1 }}</td>
           </tr>
         </thead>
         <tbody>
@@ -48,106 +47,88 @@
                 v-if="planstatus.mondayStatus == 0"
                 type="success"
                 @click="addPlan(1)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.mondayStatus == 1"
                 type="primary"
                 @click="editPlan(1)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.tuesdayStatus == 0"
                 type="success"
                 @click="addPlan(2)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.tuesdayStatus == 1"
                 type="primary"
                 @click="editPlan(2)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.wednesdayStatus == 0"
                 type="success"
                 @click="addPlan(3)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.wednesdayStatus == 1"
                 type="primary"
                 @click="editPlan(3)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.thursdayStatus == 0"
                 type="success"
                 @click="addPlan(4)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.thursdayStatus == 1"
                 type="primary"
                 @click="editPlan(4)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.fridayStatus == 0"
                 type="success"
                 @click="addPlan(5)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.fridayStatus == 1"
                 type="primary"
                 @click="editPlan(5)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.saturdayStatus == 0"
                 type="success"
                 @click="addPlan(6)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.saturdayStatus == 1"
                 type="primary"
                 @click="editPlan(6)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
             <td>
               <el-button
                 v-if="planstatus.sundayStatus == 0"
                 type="success"
                 @click="addPlan(7)"
-                >增加</el-button
-              >
+                >增加</el-button>
               <el-button
                 v-if="planstatus.sundayStatus == 1"
                 type="primary"
                 @click="editPlan(7)"
-                >查看</el-button
-              >
+                >查看</el-button>
             </td>
           </tr>
         </tbody>
       </table>
-   
-
-   
-      
         <div v-if="showAdd" class="el-card-define">
           <div align="center">
             <h2>{{ this.curplanday }}排班工作</h2>
@@ -180,8 +161,7 @@
                       type="success"
                       plain
                       @click="savePlan(d.departmentId)"
-                      >保存</el-button
-                    >
+                      >保存</el-button>
                   </td>
                 </tr>
               </thead>
@@ -194,29 +174,35 @@
                     {{ doc.docTitle }}
                   </td>
                   <td v-if="doc.departId1 == d.departmentId">
-                    <el-checkbox
+                    <!-- <el-checkbox
                       v-model="doc.amwork"
                       label="上班"
                       size="large"
                       :checked="doc.amwork"
-                    />
+                    /> -->
+                     <el-select v-model="doc.amwork" placeholder="请选择房间">
+                        <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
+                          </el-option> 
+                     </el-select>
                   </td>
                   <td v-if="doc.departId1 == d.departmentId">
-                    <el-checkbox
+                    <!-- <el-checkbox
                       v-model="doc.pmwork"
                       label="上班"
                       size="large"
                       :checked="doc.pmwork"
-                    />
+                    /> -->
+                    <el-select v-model="doc.pmwork" placeholder="请选择房间">
+                        <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
+                          </el-option> 
+                     </el-select>
                   </td>
                 </tr>
               </tbody>
             </table>
             </el-card>
-          </div>
-           
-        </div>
-      
+          </div>          
+        </div>    
      </el-card>
   </div>
 </template>
@@ -235,7 +221,6 @@ export default {
       nextMonday: '',
       lastsunday: '',
       role: false,
-      homes: [],
       dialogVisible: false,
       planstatus: {},
       curplanday: '',
@@ -247,10 +232,36 @@ export default {
     this.getTime()
   },
   methods: {
+    check(doctorworks)
+    {
+        let amworks=[];
+        let pmworks=[];
+        for(var i=0;i<doctorworks.length;i++)
+        {
+          amworks.push(doctorworks[i].amwork);
+          pmworks.push(doctorworks[i].pmwork);
+        }
+        amworks = amworks.sort();
+        pmworks = pmworks.sort();
+        for(var i = 0; i < amworks.length - 1; i++) {
+          if(amworks[i] == amworks[i + 1]) {
+            alert("上午排班地点有冲突" );
+            return false;
+          }
+        }
+         for(var i = 0; i < pmworks.length - 1; i++) {
+          if(pmworks[i] == pmworks[i + 1]) {
+            alert("下午排班地点有冲突" );
+            return false;
+          }
+        }
+        return true;
+    },
     savePlan(departmentId) {
       var formData = new FormData()
       formData.append('day', this.curplanday)
       formData.append('departmentId', departmentId)
+      let doctorworks=[];
       if (this.doctors.length > 0) {
         for (var i = 0; i < this.doctors.length; i++) {
           if (departmentId == this.doctors[i].departId1) {
@@ -264,15 +275,18 @@ export default {
             )
             formData.append(
               'doctorworks[' + i + '].amwork',
-              this.doctors[i].amwork ? 1 : 0
+              this.doctors[i].amwork 
             )
             formData.append(
               'doctorworks[' + i + '].pmwork',
-              this.doctors[i].pmwork ? 1 : 0
+              this.doctors[i].pmwork 
             )
+            doctorworks.push(this.doctors[i]);
           }
         }
       }
+      if(!this.check(doctorworks))
+        return;
       post('/updateDoctorWorks', formData)
         .then((res) => {
           alert('更新成功')
@@ -286,11 +300,11 @@ export default {
     getDoctors(day) {
       get('/getDoctorWorks', { day: day })
         .then((res) => {
-          this.doctors = res.data.data
-          for (var i = 0; i < this.doctors.length; i++) {
-            this.doctors[i].amwork = this.doctors[i].amwork == 1
-            this.doctors[i].pmwork = this.doctors[i].pmwork == 1
-          }
+          this.doctors = res.data.data;
+          
+           for(var i=0;i<res.data.data.length+1;i++){
+           this.doctors[i].rooms  = res.data.data[i].rooms;
+    }
         })
         .catch((error) => {
           console.log(error)
@@ -356,44 +370,22 @@ export default {
       this.showAdd = false
       this.dayList = []
       this.getBeforNday(this.base, 7)
-      console.log(this.dateFormat2)
       this.getTableData(this.nextMonday)
     },
     nextweek() {
       this.showAdd = false
       this.dayList = []
       this.getBeforNday(this.base, -7)
-      console.log(this.dateFormat2)
       this.getTableData(this.nextMonday)
     },
     getTime() {
-      var myDate = new Date()
-      var year = myDate.getFullYear()
-      var month = myDate.getMonth() + 1
-      var date = myDate.getDate()
+      var myDate = new Date()    
       var str = myDate.getDay()
       console.log(str, 888)
-      if (str == 1) {
-        this.getBeforNday(myDate, 1)
-      }
-      if (str == 2) {
-        this.getBeforNday(myDate, 2)
-      }
-      if (str == 3) {
-        this.getBeforNday(myDate, 3)
-      }
-      if (str == 4) {
-        this.getBeforNday(myDate, 4)
-      }
-      if (str == 5) {
-        this.getBeforNday(myDate, 5)
-      }
-      if (str == 6) {
-        this.getBeforNday(myDate, 6)
-      }
-      if (str == 0) {
-        this.getBeforNday(myDate, 0)
-      }
+      for(var i=0;i<7;i++)
+        if(str==i){
+          this.getBeforNday(myDate,str);
+        }     
     },
     getBeforNday(date, n) {
       var todays = date.getTime()
@@ -408,10 +400,6 @@ export default {
       var strYear = yesterday.getFullYear()
       var strDay = yesterday.getDate()
       var strMonth = yesterday.getMonth() + 1
-      var strdate = yesterday.getDay()
-
-      if (strdate == 0) {
-      }
       if (strMonth < 10) {
         strMonth = '0' + strMonth
       }
@@ -421,13 +409,8 @@ export default {
       this.lastsunday = datastr
       this.dateFormat1 = strYear + '-' + strMonth + '-' + strDay
       this.base = yesterday
-      this.getotherday(yesterday, -1)
-      this.getotherday(yesterday, -2)
-      this.getotherday(yesterday, -3)
-      this.getotherday(yesterday, -4)
-      this.getotherday(yesterday, -5)
-      this.getotherday(yesterday, -6)
-      this.getotherday(yesterday, -7)
+      for(var i=-1;i>-8;i--)
+        this.getotherday(yesterday, i)
     },
     getotherday(date, n) {
       var yesterday_milliseconds = date.getTime() - n * 1000 * 60 * 60 * 24
@@ -437,7 +420,6 @@ export default {
       var strYear = yesterday.getFullYear()
       var strDay = yesterday.getDate()
       var strMonth = yesterday.getMonth() + 1
-      var strdate = yesterday.getDay()
       if (strMonth < 10) {
         strMonth = '0' + strMonth
       }
@@ -533,7 +515,7 @@ export default {
 }
 .el-card-define {
 
-  height:400px;
+  height:500px;
   overflow-y:auto
 }
 .big{

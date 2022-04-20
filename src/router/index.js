@@ -116,6 +116,14 @@ const routes = [
           name: '排班'
         },
         component: () => import('../views/Workplan/index.vue')
+      },
+      {
+        path: '/workplanView',
+        name: 'WorkplanView',
+        meta: {
+          name: '排班预览'
+        },
+        component: () => import('../views/Workplan/view.vue')
       }
     ]
   },

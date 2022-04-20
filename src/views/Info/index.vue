@@ -7,7 +7,7 @@
           <el-table
             :data="types"
             style="width: 100%"
-            height="550"
+            height="700"
             accordion="true"
           >
             <el-table-column type="expand">
