@@ -70,7 +70,7 @@ const routes = [
         path: '/infozb',
         name: 'Infozb',
         meta: {
-          name: '科室值班'
+          name: '科室位置'
         },
         component: () => import('../views/Info/indexzb.vue')
       }
@@ -129,12 +129,11 @@ const routes = [
   },
   {
     path: '/user',
-    name: 'user', //药品
+    name: 'user', 
     meta: {
       name: '用户管理',
       icon: 'User'
     },
-    //控制台
     component: Layout,
     children: [
       {

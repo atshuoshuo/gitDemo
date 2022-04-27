@@ -515,11 +515,11 @@ export default {
 }
 .el-card-define {
 
-  height:500px;
+  height: 350px;
   overflow-y:auto
 }
 .big{
-  margin-top: 5px;
+  margin-top: 10px;
   margin-left: 15px;
   margin-right: 15px;
 }

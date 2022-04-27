@@ -8,38 +8,39 @@
     </el-row>
   </div>
   <div class="biao">
-    
     <el-row>
       <el-col :span="1"></el-col>
       <el-col :span="22">
         <el-card class="box-card">
-        <el-table :data="types" stripe style="width: 100%">
-          <el-table-column prop="userName" label="用户名" />
-          <el-table-column prop="telephone" label="电话" />
-          <el-table-column prop="realName" label="真实姓名" />
-          <el-table-column prop="roleName" label="用户类型" />
-          <el-table-column prop="lastLogin" label="最后登录时间" />
-          <el-table-column align="right" label="操作">
-            <template #default="{ row }">
-              <el-button
-                type="success"
-                size="small"
-                @click="handleDiaClick(row)"
-              >
-                编辑
-              </el-button>
-              <el-popconfirm title="确认要重置密码吗?" @confirm="reset(row)">
-                <template #reference>
-                  <el-button type="warning" size="small">重置密码</el-button>
-                </template>
-              </el-popconfirm>
-            </template>
-          </el-table-column>
-        </el-table></el-card>
+          <el-table :data="types" stripe style="width: 100%">
+            <el-table-column prop="userName" label="用户名" />
+            <el-table-column prop="telephone" label="电话" />
+            <el-table-column prop="realName" label="真实姓名" />
+            <el-table-column prop="roleName" label="用户类型" />
+            <el-table-column prop="lastLogin" label="最后登录时间" />
+            <el-table-column align="right" label="操作">
+              <template #default="{ row }">
+                <el-button
+                  type="success"
+                  size="small"
+                  @click="handleDiaClick(row)"
+                >
+                  编辑
+                </el-button>
+                <el-popconfirm title="确认要重置密码吗?" @confirm="reset(row)">
+                  <template #reference>
+                    <el-button type="warning" size="small">重置密码</el-button>
+                  </template>
+                </el-popconfirm>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div class="example-pagination-block">
+            <el-pagination layout="prev, pager, next" :total="3" />
+          </div>
+        </el-card>
       </el-col>
       <el-col :span="1"></el-col>
-   
-      
     </el-row>
   </div>
 

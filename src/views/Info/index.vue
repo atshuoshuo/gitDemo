@@ -163,6 +163,6 @@ export default {
 
 <style lang="scss" scope>
 .top {
-  margin-top: 35px;
+  margin-top: 15px;
 }
 </style>
