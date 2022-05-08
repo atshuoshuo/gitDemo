@@ -108,7 +108,7 @@ export default {
       console.log(props.row.departmentId)
       console.log(this.input)
       if (this.input != '') {
-        get('/addDepartsLeve', {
+        get('/addDepartment', {
           departmentName: this.input,
           level: 2,
           parentId: props.row.departmentId
@@ -128,7 +128,7 @@ export default {
     deleks(row) {
       console.log(row.row.departmentId)
 
-      get('/deleDepartsLeve', {
+      get('/deleDepartment', {
         departmentId: row.row.departmentId
       })
       ElMessage({
@@ -144,7 +144,7 @@ export default {
     edit() {
       this.dialogVisible = !this.dialogVisible
       console.log(this.abc.row)
-      get('/upDepartsLeve', {
+      get('/updateDepartment', {
         departmentId: this.abc.row.departmentId,
         departmentName: this.abc.row.departmentName,
         level: this.abc.row.level,
