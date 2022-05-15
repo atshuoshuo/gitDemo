@@ -128,7 +128,7 @@ export default {
     deleks(row) {
       console.log(row.row.departmentId)
 
-      get('/deleDepartment', {
+      get('/deleteDepartment', {
         departmentId: row.row.departmentId
       })
       ElMessage({

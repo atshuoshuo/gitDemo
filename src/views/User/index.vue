@@ -119,7 +119,7 @@ export default {
     },
     reset(row) {
       this.adg = row
-      get('/updatepd', {
+      get('/updatePassword', {
         userId: this.adg.userId,
         password: 123456
       })

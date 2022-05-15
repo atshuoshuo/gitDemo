@@ -150,7 +150,7 @@ export default {
     deleks(row) {
       console.log(row.row)
 
-      get('/deleRoom', {
+      get('/deleteRoom', {
         roomId: row.row.roomId
       })
       ElMessage({
