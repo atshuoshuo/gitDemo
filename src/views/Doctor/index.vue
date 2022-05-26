@@ -4,13 +4,21 @@
   </el-button>
   <el-card class="box-card">
     <el-table :data="types" stripe style="width: 100%" height="500">
-      <el-table-column prop="docName" label="姓名" width="180" />
-      <el-table-column prop="docTitle" label="职位" width="180" />
-      <el-table-column prop="politicstatus" label="政治面貌" width="180" />
-      <el-table-column prop="education" label="学历" width="180" />
-      <el-table-column prop="nation" label="民族" width="180" />
-      <el-table-column prop="userName" label="用户名" width="180" />
-      <el-table-column prop="telephone" label="电话" width="180" />
+      <el-table-column prop="docName" label="姓名" width="150" />
+      <el-table-column prop="docTitle" label="职位" width="150" />
+      <el-table-column prop="politicstatus" label="政治面貌" width="150" />
+      <el-table-column prop="education" label="学历" width="150" />
+
+      <el-table-column prop="img" label="头像" sortable width="150">
+        <!--插入图片链接的代码-->
+        <template #default="row">
+          <el-image :src="row.row.img" style="width: 70px; height: 70px" />
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="nation" label="民族" width="150" />
+      <el-table-column prop="userName" label="用户名" width="150" />
+      <el-table-column prop="telephone" label="电话" width="150" />
       <el-table-column fixed="right" label="操作" width="310">
         <template #default="row">
           <el-button type="success" @click="handleDiaClick(row)">

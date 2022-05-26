@@ -40,7 +40,7 @@ const routes = [
         path: '/index',
         name: 'Index',
         meta: {
-          name: '首页'
+          name: '医院公告'
         },
         component: () => import('../views/Console/index.vue')
       }
