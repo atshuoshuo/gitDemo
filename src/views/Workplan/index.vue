@@ -22,6 +22,7 @@
       <el-divider>
         <el-icon><star-filled /></el-icon>
       </el-divider>
+     
       <table
         border="0"
         cellspacing="1px"
@@ -129,6 +130,8 @@
           </tr>
         </tbody>
       </table>
+        <el-divider></el-divider>
+     
         <div v-if="showAdd" class="el-card-define">
           <div align="center">
             <h2>{{ this.curplanday }}排班工作</h2>
@@ -142,66 +145,55 @@
               @click="submitStatus()"
             />
           </div>
-          
-          <div
-            v-for="(d, index2) in departments"
-            :key="d.departmentId"
-            class="aaaa"
-          ><el-card class="box-card1">
-             <el-button round>{{ index2 + 1 }}、{{ d.departmentName }}</el-button>
-            <table>
-              <thead>
-                <tr>
-                  <td width="200">医生姓名</td>
-                  <td width="200">医生职称</td>
-                  <td width="200">上午</td>
-                  <td width="200">下午</td>
-                  <td>
-                    <el-button
-                      type="success"
-                      plain
-                      @click="savePlan(d.departmentId)"
-                      >保存</el-button>
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="doc in doctors" :key="doc.docId">
-                  <td v-if="doc.departId1 == d.departmentId">
-                    {{ doc.docName }}
-                  </td>
-                  <td v-if="doc.departId1 == d.departmentId">
-                    {{ doc.docTitle }}
-                  </td>
-                  <td v-if="doc.departId1 == d.departmentId">
-                    <!-- <el-checkbox
-                      v-model="doc.amwork"
-                      label="上班"
-                      size="large"
-                      :checked="doc.amwork"
-                    /> -->
-                     <el-select v-model="doc.amwork" placeholder="请选择房间">
-                        <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
-                          </el-option> 
-                     </el-select>
-                  </td>
-                  <td v-if="doc.departId1 == d.departmentId">
-                    <!-- <el-checkbox
-                      v-model="doc.pmwork"
-                      label="上班"
-                      size="large"
-                      :checked="doc.pmwork"
-                    /> -->
-                    <el-select v-model="doc.pmwork" placeholder="请选择房间">
-                        <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
-                          </el-option> 
-                     </el-select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </el-card>
-          </div>          
+   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+        <el-tab-pane  v-for="(d) in departments"
+            :key="d.departmentId" :label="d.departmentName" :name="d.departmentName">
+            <div v-if="d.departmentName==activeName">
+              <table align="center">
+                <thead>
+                  <tr>
+                    <td width="200">医生姓名</td>
+                    <td width="200">医生职称</td>
+                    <td width="200">上午</td>
+                    <td width="200">下午</td>
+                    <td>
+                      
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="doc in doctors" :key="doc.docId">
+                    <td v-if="doc.departId1 == d.departmentId">
+                      {{ doc.docName }}
+                    </td>
+                    <td v-if="doc.departId1 == d.departmentId">
+                      {{ doc.docTitle }}
+                    </td>
+                    <td v-if="doc.departId1 == d.departmentId">
+                      <el-select v-model="doc.amwork" placeholder="请选择房间">
+                          <el-option label="休息" value="0">休息</el-option>
+                          <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
+                            </el-option> 
+                      </el-select>
+                    </td>
+                    <td v-if="doc.departId1 == d.departmentId">
+                      <el-select v-model="doc.pmwork" placeholder="请选择房间">
+                          <el-option v-for="(room,index) in doc.rooms" :key="index" :label="room.roomName" :value="room.roomName">
+                            </el-option> 
+                      </el-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div align="center" style="margin:30px"><el-button
+                        type="success"
+                        plain
+                        v-show="!finished"
+                        @click="savePlan(d.departmentId)"
+                        >保存</el-button></div>
+            </div>
+        </el-tab-pane>
+      </el-tabs>        
         </div>    
      </el-card>
   </div>
@@ -213,6 +205,7 @@ import { ElMessage } from 'element-plus'
 export default {
   data() {
     return {
+      activeName:'内科',
       finished: false,
       showAdd: false,
       dayList: [],
@@ -244,13 +237,13 @@ export default {
         amworks = amworks.sort();
         pmworks = pmworks.sort();
         for(var i = 0; i < amworks.length - 1; i++) {
-          if(amworks[i] == amworks[i + 1]) {
+          if(amworks[i] == amworks[i + 1]&&amworks[i]!="0") {
             alert("上午排班地点有冲突" );
             return false;
           }
         }
          for(var i = 0; i < pmworks.length - 1; i++) {
-          if(pmworks[i] == pmworks[i + 1]) {
+          if(pmworks[i] == pmworks[i + 1]&&pmworks[i]!="0") {
             alert("下午排班地点有冲突" );
             return false;
           }
@@ -522,5 +515,8 @@ export default {
   margin-top: 10px;
   margin-left: 15px;
   margin-right: 15px;
+}
+.ml-2{
+  margin: 10px;
 }
 </style>

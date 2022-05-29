@@ -12,16 +12,18 @@
         <el-button type="primary" @click="lastweek">上一周</el-button>
         <el-button type="primary" @click="nextweek">下一周</el-button>
       </div>
-      </el-card>
-      <el-card class="box-card1">
+    </el-card>
+    <el-card class="box-card1">
       <div v-for="(d, i) in departments" :key="i" v-show="d.departmentName">
         <el-divider>
           <el-icon><star-filled /></el-icon>
         </el-divider>
-        <el-button type="info" plain>=={{ d.departmentName }}==</el-button>
-        
+        <el-button type="primary" plain
+          >&nbsp;&nbsp;{{ d.departmentName }}&nbsp;&nbsp;</el-button
+        >
+
         <table
-          border="0"
+          border="1"
           cellspacing="1px"
           bordercolor="#254389"
           cellpadding="0"
@@ -39,32 +41,65 @@
                 {{ day }}
               </td>
             </tr>
-            
-            <tr  height="30" class="hang" >
-              <td v-for="(i, index) in 14" :key="index" >
-                <span v-if="index % 2 == 0" >上午</span>
-                <span v-if="index % 2 == 1">下午</span>
+            <tr height="30" class="hang">
+              <td v-for="(i, index) in weektimes" :key="index">
+                <span v-if="index % 2 == 0"
+                  ><el-button type="warning" plain>上午</el-button></span
+                >
+                <span v-if="index % 2 == 1"
+                  ><el-button type="primary" plain>下午</el-button></span
+                >
               </td>
             </tr>
-            
           </thead>
           <tbody>
             <tr v-for="(p, index) in plans" :key="index">
               <td v-if="p.departId1 == d.departmentId">{{ p.docName }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[0] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[1] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[2] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[3] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[4] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[5] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[6] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[7] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[8] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[9] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[10] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[11] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[12] }}</td>
-              <td v-if="p.departId1 == d.departmentId">{{ p.weekplan[13] }}</td>
+              <!-- <td v-for="(i,index2) in weektimes" :key="index2">
+                <span v-if="p.departId1 == d.departmentId">{{ p.weekplan[i]=='0'?"休息":p.weekplan[i] }}</span>
+              </td> -->
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[0] == '0' ? '休息' : p.weekplan[0] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[1] == '0' ? '休息' : p.weekplan[1] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[2] == '0' ? '休息' : p.weekplan[2] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[3] == '0' ? '休息' : p.weekplan[3] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[4] == '0' ? '休息' : p.weekplan[4] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[5] == '0' ? '休息' : p.weekplan[5] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[6] == '0' ? '休息' : p.weekplan[6] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[7] == '0' ? '休息' : p.weekplan[7] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[8] == '0' ? '休息' : p.weekplan[8] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[9] == '0' ? '休息' : p.weekplan[9] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[10] == '0' ? '休息' : p.weekplan[10] }}
+              </td>
+              <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[11] == '0' ? '休息' : p.weekplan[11] }}
+              </td>
+               <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[11] == '0' ? '休息' : p.weekplan[12] }}
+              </td>
+               <td v-if="p.departId1 == d.departmentId">
+                {{ p.weekplan[11] == '0' ? '休息' : p.weekplan[13] }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -79,6 +114,7 @@ import { ElMessage } from 'element-plus'
 export default {
   data() {
     return {
+      weektimes: 14,
       base: '',
       nextMonday: '',
       lastsunday: '',
@@ -98,7 +134,6 @@ export default {
       get('/getDepartsLevel1')
         .then((res) => {
           this.departments = res.data.data
-          console.log(this.departments)
         })
         .catch((error) => {
           console.log(error)
@@ -135,6 +170,7 @@ export default {
             }
             this.plans[j].weekplan = weekplan
           }
+          console.log('=========')
           console.log(this.plans)
         })
         .catch((error) => {
@@ -233,9 +269,9 @@ export default {
 </script>
 
 <style scoped>
-.box-card1{
- height: 550px;
-  overflow-y:auto
+.box-card1 {
+  height: 550px;
+  overflow-y: auto;
 }
 .title {
   color: var(--el-text-color-regular);
@@ -244,12 +280,11 @@ export default {
   text-align: center;
   color: #409eff;
 }
-.da{
+.da {
   margin-top: 10px;
   margin-left: 15px;
   margin-right: 15px;
 }
-.hang{
-  
+.hang {
 }
 </style>
