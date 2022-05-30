@@ -16,6 +16,12 @@
         </template>
       </el-table-column>
 
+      <el-table-column label="是否推荐" width="150">
+        <template #default="row">
+          <el-switch v-model="row.row.recommend" class="mt-2"  @click="tuijina(row)"/>
+        </template>
+      </el-table-column>
+
       <el-table-column prop="nation" label="民族" width="150" />
       <el-table-column prop="userName" label="用户名" width="150" />
       <el-table-column prop="telephone" label="电话" width="150" />
@@ -169,6 +175,7 @@ export default {
       dialogVisible2: false,
       Edit: [],
       form: [],
+      value2: false,
       //二级联动
       options: [],
       selectedOptions: [],
@@ -310,6 +317,17 @@ export default {
           })
           window.location.reload()
         }
+      })
+    },
+    tuijina(row){
+      console.log(row.row.docId)
+       get('/updateRecommend', {
+        docId: row.row.docId,
+        recommend: row.row.recommend,
+      })
+      ElMessage({
+        message: '修改成功',
+        type: 'success'
       })
     }
   }
