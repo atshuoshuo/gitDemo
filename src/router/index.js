@@ -93,9 +93,17 @@ const routes = [
         path: '/doctorIndex',
         name: 'DoctorIndex',
         meta: {
-          name: '查看医生'
+          name: '医生管理'
         },
         component: () => import('../views/Doctor/index.vue')
+      },
+      {
+        path: '/doctorFee',
+        name: 'DoctorFee',
+        meta: {
+          name: '费用管理'
+        },
+        component: () => import('../views/Doctor/fee.vue')
       }
     ]
   },
