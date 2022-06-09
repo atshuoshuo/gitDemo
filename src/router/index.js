@@ -28,7 +28,7 @@ const routes = [
     path: '/console',
     name: 'Console',
     redirect: 'index',
-   //从定向
+    //从定向
     meta: {
       name: '控制台',
       icon: 'Stopwatch'
@@ -40,7 +40,7 @@ const routes = [
         path: '/index',
         name: 'Index',
         meta: {
-          name: '医院公告'
+          name: '医院公告',
         },
         component: () => import('../views/Console/index.vue')
       }
@@ -81,7 +81,7 @@ const routes = [
 
   {
     path: '/doctor',
-    name: 'doctor', 
+    name: 'doctor',
     meta: {
       name: '医生管理',
       icon: 'Link'
@@ -137,7 +137,7 @@ const routes = [
   },
   {
     path: '/user',
-    name: 'user', 
+    name: 'user',
     meta: {
       name: '用户管理',
       icon: 'User'
@@ -160,5 +160,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
 
 export default router
