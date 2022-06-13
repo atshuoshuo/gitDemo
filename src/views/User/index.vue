@@ -2,9 +2,9 @@
   <div class="biao1">
     <el-row :gutter="20">
       <el-col :span="7">
-        <el-input clearable></el-input>
+        <el-input clearable v-model="searchStr"></el-input>
       </el-col>
-      <el-button type="primary">搜索</el-button>
+      <el-button type="primary" @click="searchUser()">搜索</el-button>
     </el-row>
   </div>
   <div class="biao">
@@ -12,7 +12,7 @@
       <el-col :span="1"></el-col>
       <el-col :span="22">
         <el-card class="box-card">
-          <el-table :data="types" stripe style="width: 100%">
+          <el-table :data="susers" stripe style="width: 100%">
             <el-table-column prop="userName" label="用户名" />
             <el-table-column prop="telephone" label="电话" />
             <el-table-column prop="realName" label="真实姓名" />
@@ -46,10 +46,10 @@
 
   <el-dialog v-model="dialogVisible" title="编辑" width="30%">
     <el-form label-width="120px">
-      <el-form-item label="用户ID" :data="types" v-if="false">
+      <el-form-item label="用户ID" :data="users" v-if="false">
         <el-input v-model="Edit.userId" />
       </el-form-item>
-      <el-form-item label="用户名" :data="types">
+      <el-form-item label="用户名" :data="users">
         <el-input v-model="Edit.userName" />
       </el-form-item>
       <el-form-item label="电话">
@@ -80,7 +80,8 @@ export default {
   name: 'infoIndex',
   data() {
     return {
-      types: [],
+      searchStr: '',
+      users: [],
       Edit: [],
       adg: [],
       flag: false,
@@ -89,12 +90,27 @@ export default {
   },
   setup() {},
   mounted() {
-    get('/getUsers').then((res) => {
-      this.types = res.data.data
-      console.log(this.types)
-    })
+    this.getAllUsers()
+  },
+  computed: {
+    susers() {
+      if (this.searchStr == '')
+      return this.users;
+      else
+        return this.users.filter((p) => {
+          return p.userName.indexOf(this.searchStr) !== -1
+        })
+    }
   },
   methods: {
+    getAllUsers() {
+      get('/getUsers').then((res) => {
+        this.users = res.data.data
+      })
+    },
+    searchUser() {
+      
+    },
     handleDiaClick(row) {
       this.dialogVisible = !this.dialogVisible
       console.log(row)
