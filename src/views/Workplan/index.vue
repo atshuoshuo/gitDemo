@@ -215,6 +215,7 @@
                     </td>
                     <td v-if="doc.departId1 == d.departmentId">
                       <el-select v-model="doc.pmwork" placeholder="请选择房间">
+                       <el-option label="休息" value="0">休息</el-option>
                         <el-option
                           v-for="(room, index) in doc.rooms"
                           :key="index"

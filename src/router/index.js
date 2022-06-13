@@ -30,7 +30,7 @@ const routes = [
     redirect: 'index',
     //从定向
     meta: {
-      name: '控制台',
+      name: '公告管理',
       icon: 'Stopwatch'
     },
     //控制台

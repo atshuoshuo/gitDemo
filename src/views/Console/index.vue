@@ -2,25 +2,25 @@
   <el-card>
     <el-button type="success" @click="add()">添加公告</el-button>
     <el-table :data="types" stripe style="width: 100%">
-      <el-table-column label="所有公告">
-        <el-table-column prop="title" label="标题" width="420" />
-        <el-table-column prop="content" label="内容" width="200">
+      <el-table-column>
+        <el-table-column prop="title" label="标题" width="350" />
+        <el-table-column prop="content" label="内容" width="150">
           <template #default="row">
             <el-button type="primary" @click="view(row.row.content)"
               >查看内容</el-button
             >
           </template>
         </el-table-column>
-        <el-table-column label="是否推荐" width="150">
+        <el-table-column label="是否推荐" width="100">
         <template #default="row">
           <el-switch v-model="row.row.recommend" class="mt-2"  @click="tuijina(row)"/>
         </template>
       </el-table-column>
         <el-table-column prop="day" label="发布日期" width="150" />
-        <el-table-column fixed="right" label="操作" width="520">
+        <el-table-column fixed="right" label="操作" width="200">
           <template #default="row">
             <el-button type="success" @click="handleDiaClick(row)">
-              更多编辑
+              编辑
             </el-button>
             <!-- 删除确认框 -->
             <el-popconfirm title="确定要删除吗?" @confirm="deleks(row)">

@@ -44,8 +44,7 @@
             <tr height="30" class="hang">
               <td v-for="(i, index) in weektimes" :key="index">
                 <span v-if="index % 2 == 0"
-                  ><el-button type="warning" plain>上午</el-button></span
-                >
+                  ><el-button type="warning" plain>上午</el-button></span>
                 <span v-if="index % 2 == 1"
                   ><el-button type="primary" plain>下午</el-button></span
                 >
