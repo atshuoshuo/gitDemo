@@ -25,8 +25,8 @@ const routes = [
   },
 
   {
-    path: '/console',
-    name: 'Console',
+    path: '/carousel',
+    name: 'system',
     redirect: 'index',
     //从定向
     meta: {
@@ -37,12 +37,20 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '/index',
-        name: 'Index',
+        path: '/notice',
+        name: 'Notice',
         meta: {
           name: '医院公告',
         },
-        component: () => import('../views/Console/index.vue')
+        component: () => import('../views/Carousel/notice.vue')
+      },
+      {
+        path: '/carousel',
+        name: 'Carousel',
+        meta: {
+          name: '轮播图管理',
+        },
+        component: () => import('../views/Carousel/index.vue')
       }
     ]
   },

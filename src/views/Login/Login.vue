@@ -91,7 +91,6 @@ export default {
   mounted() {
     get('/getRoleList').then((res) => {
       this.types = res.data.data
-      console.log(this.types)
     })
   },
   methods: {
@@ -102,10 +101,9 @@ export default {
         userRole: this.value
       }).then((res) => {
         this.login = res.data
-        console.log(this.login)
         if (this.login.code == 0) {
           this.$router.push({
-            name: 'Console'
+            name: 'Notice'
           }),
             ElMessage({
               message: '登录成功！',
