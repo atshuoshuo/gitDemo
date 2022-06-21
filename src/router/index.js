@@ -72,15 +72,15 @@ const routes = [
         meta: {
           name: '查看科室'
         },
-        component: () => import('../views/Info/index.vue')
+        component: () => import('../views/Department/index.vue')
       },
       {
-        path: '/infozb',
-        name: 'Infozb',
+        path: '/room',
+        name: 'Room',
         meta: {
           name: '科室位置'
         },
-        component: () => import('../views/Info/indexzb.vue')
+        component: () => import('../views/Department/room.vue')
       }
     ]
   },
