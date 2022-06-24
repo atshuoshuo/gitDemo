@@ -5,9 +5,8 @@
       <el-col :span="22">
         <el-card class="box-card">
           <el-table
-            :data="types"
+            :data="types.slice((currentPage - 1) * pagesize, currentPage * pagesize) "
             style="width: 100%"
-            height="700"
             accordion="true"
           >
             <el-table-column type="expand">
@@ -60,6 +59,15 @@
             </el-table-column>
             <el-table-column label="科室" prop="departmentName"
           /></el-table>
+
+<el-pagination
+        layout="total,sizes,prev,pager,next,jumper"
+        :total="types.length"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+      />
+
         </el-card>
       </el-col>
       <el-col :span="1"></el-col>
@@ -91,6 +99,8 @@ export default {
   setup() {},
   data() {
     return {
+currentPage: 1, //默认页码为1
+pagesize: 15, //默认一页显示10条
       types: [],
       abc: [],
       input: '',
@@ -156,6 +166,14 @@ export default {
             type: 'success'
           })
       })
+    },
+    handleSizeChange(size) {
+      //一页显示多少条
+      this.pagesize = size;
+    },
+    handleCurrentChange(currentPage) {
+      //页码更改方法
+      this.currentPage = currentPage;
     }
   }
 }

@@ -136,9 +136,10 @@ export default {
     reset(row) {
       this.adg = row
       get('/updatePassword', {
-        userId: this.adg.userId,
-        password: 123456
-      })
+        userId: this.adg.userId
+      }).then((res) => {
+         alert(res.data);
+        })
       ElMessage({
         message: '重置密码成功',
         type: 'success'
