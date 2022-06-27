@@ -109,7 +109,6 @@ export default {
     },
     edit() {
       this.dialogVisible = !this.dialogVisible
-      console.log(this.Edit)
       get('/updateRoom', {
         departId1: this.Edit.departId1,
         departId2: this.Edit.departId2,
@@ -117,7 +116,6 @@ export default {
         roomId: this.Edit.roomId,
         roomName: this.Edit.roomName
       }).then((res) => {
-        console.log(res),
           ElMessage({
             message: '修改成功！',
             type: 'success'
@@ -136,7 +134,6 @@ export default {
           floor: this.from.floor,
           roomName: this.from.roomName
         }).then((res) => {
-          console.log(res),
             ElMessage({
               message: '添加成功！',
               type: 'success'

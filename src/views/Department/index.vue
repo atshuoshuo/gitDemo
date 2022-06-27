@@ -160,7 +160,6 @@ pagesize: 15, //默认一页显示10条
         level: this.abc.row.level,
         parentId: this.abc.row.parentId
       }).then((res) => {
-        console.log(res),
           ElMessage({
             message: '修改成功！',
             type: 'success'
