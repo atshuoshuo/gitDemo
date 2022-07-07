@@ -2,7 +2,7 @@
   <div class="biao1">
     <el-row :gutter="20">
       <el-col :span="7">
-        <el-input clearable v-model="searchStr"></el-input>
+        <el-input clearable v-model="searchStr" ></el-input>
       </el-col>
       <el-button type="primary" @click="searchUser()">搜索</el-button>
     </el-row>
@@ -88,7 +88,6 @@ export default {
       dialogVisible: false
     }
   },
-  setup() {},
   mounted() {
     this.getAllUsers()
   },

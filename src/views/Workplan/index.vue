@@ -5,7 +5,7 @@
       <div class="search">
         <el-button type="primary" @click="lastweek">上一周</el-button>
         <el-button
-          v-if="this.planstatus == null"
+          v-if="this.planstatus == null||this.planstatus==''"
           type="success"
           @click="startplan"
           >开始排班</el-button
@@ -537,7 +537,9 @@ export default {
     getTableData(day) {
       get('/getPlansStatus', { startDay: day })
         .then((res) => {
-          this.planstatus = res.data.data
+          console.log("=============getPlansStatus=======");
+          console.log(res.data);
+          this.planstatus = res.data
         })
         .catch((error) => {
           console.log(error)
