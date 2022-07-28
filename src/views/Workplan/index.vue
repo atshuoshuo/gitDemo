@@ -535,7 +535,7 @@ export default {
     },
 
     getTableData(day) {
-      get('/getPlansStatus2', { startDay: day })
+      get('/getPlansStatus', { startDay: day })
         .then((res) => {
           console.log("=============getPlansStatus=======");
           console.log(res.data);
