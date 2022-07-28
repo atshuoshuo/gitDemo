@@ -40,7 +40,7 @@ const routes = [
         path: '/notice',
         name: 'Notice',
         meta: {
-          name: '医院公告',
+          name: '医院公告'
         },
         component: () => import('../views/Carousel/notice.vue')
       },
@@ -48,7 +48,7 @@ const routes = [
         path: '/carousel',
         name: 'Carousel',
         meta: {
-          name: '轮播图管理',
+          name: '轮播图管理'
         },
         component: () => import('../views/Carousel/index.vue')
       }
@@ -161,13 +161,48 @@ const routes = [
         component: () => import('../views/User/index.vue')
       }
     ]
-  }
+  },
+  //医生端
+  {
+    path: '/doctorLogin',
+    name: 'doctorLogin',
+    hidden: true,
+    meta: {
+      name: '后端主页'
+    },
+    component: () => import('../components/Doctor/Layout/index.vue'),
+    children: [
+      {
+        path: '/paiban',
+        name: 'paiban',
+        meta: {
+          name: '查看排班'
+        },
+        component: () => import('../components/Doctor/workforce/Working.vue')
+      },
+      {
+        path: '/huanze',
+        name: 'huanze',
+        meta: {
+          name: '患者信息'
+        },
+        component: () => import('../components/Doctor/patient/Patient.vue')
+      },
+      {
+        path: '/xinxi',
+        name: 'xinxi',
+        meta: {
+          name: '个人信息'
+        },
+        component: () => import('../components/Doctor/personage/Personage.vue')
+      }
+    ]
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
 
 export default router

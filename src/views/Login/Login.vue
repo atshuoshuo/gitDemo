@@ -9,22 +9,22 @@
         <div class="login_title"></div>
         <div class="login_input">
           <el-form-item prop="userName">
-          <el-input
-            prefix-icon="User"
-            placeholder="请输入账号"
-            v-model="from.userName"
-          ></el-input>
+            <el-input
+              prefix-icon="User"
+              placeholder="请输入账号"
+              v-model="from.userName"
+            ></el-input>
           </el-form-item>
         </div>
         <div class="login_input">
           <el-form-item prop="passWord">
-          <el-input 
-            prefix-icon="Lock"
-            placeholder="请输入密码"
-            show-password
-            v-model="from.passWord"
-          ></el-input>
-        </el-form-item>
+            <el-input
+              prefix-icon="Lock"
+              placeholder="请输入密码"
+              show-password
+              v-model="from.passWord"
+            ></el-input>
+          </el-form-item>
         </div>
         <el-select
           v-model="value"
@@ -63,6 +63,7 @@ export default {
         userName: '',
         passWord: ''
       },
+      loginState: sessionStorage.login,
       types: [],
       value: '',
       login: []
@@ -75,9 +76,9 @@ export default {
           required: true,
           message: '请填写账户',
           trigger: 'blur'
-        },
+        }
       ],
-      passWord:[
+      passWord: [
         {
           required: true,
           message: '请填写密码',
@@ -85,8 +86,8 @@ export default {
         }
       ]
     })
-    
-    return {rules}
+
+    return { rules }
   },
   mounted() {
     get('/getRoleList').then((res) => {
@@ -101,19 +102,39 @@ export default {
         userRole: this.value
       }).then((res) => {
         this.login = res.data
+        console.log(res.data)
         if (this.login.code == 0) {
-          this.$router.push({
-            name: 'Notice'
-          }),
+          if (res.data.data.userRole == 'user') {
+            this.$router.push({
+              name: 'Notice'
+            })
             ElMessage({
               message: '登录成功！',
               type: 'success'
             })
+          }
+          if (this.login.data.userRole == 'doctor') {
+            get('/getDoctorsByNameAndTelephone', {
+              docName: res.data.data.realName,
+              telephone: res.data.data.telephone,
+            }).then((res) => {
+              sessionStorage.login = true;
+              sessionStorage.docId = res.data.data.docId;
+            })
+            ,
+            this.$router.push({
+              name: 'doctorLogin'
+            })
+            ElMessage({
+              message: '登录成功！',
+              type: 'success'
+            })
+          }
         } else {
           ElMessage.error('登录失败，请输入正确的密码，或用户名，或权限！')
         }
       })
-    },
+    }
   }
 }
 </script>
