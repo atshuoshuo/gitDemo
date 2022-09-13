@@ -102,7 +102,8 @@ export default {
         userRole: this.value
       }).then((res) => {
         this.login = res.data
-        console.log(res.data)
+        sessionStorage.setItem("token",res.data.token);
+        console.log(res.data.token)
         if (this.login.code == 0) {
           if (res.data.data.userRole == 'user') {
             this.$router.push({

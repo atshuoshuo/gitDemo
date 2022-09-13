@@ -163,4 +163,8 @@ export default {
   margin-top: 35px;
   margin-left: 55px;
 }
+.box-card{
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+}
 </style>
