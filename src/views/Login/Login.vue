@@ -105,7 +105,7 @@ export default {
         sessionStorage.setItem("token",res.data.token);
         console.log(res.data.token)
         if (this.login.code == 0) {
-          if (res.data.data.userRole == 'user') {
+          if (res.data.data.userRole == 'admin') {
             this.$router.push({
               name: 'Notice'
             })
